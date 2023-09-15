@@ -1,0 +1,20 @@
+h1, h2 /*group rule*/
+{
+    color: blueviolet;
+}
+.box > p /*child rule*/
+{
+    color: firebrick;
+}
+.box li /*descendant rule*/
+{
+    color: blue;
+}
+li.done /*chain rule*/
+{
+    color: seagreen;
+}
+ul p.done /*combining combiners*/
+{
+    font-size: 0.5rem;
+}
