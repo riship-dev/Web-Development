@@ -1,0 +1,33 @@
+body 
+{
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 18px;
+}
+
+/* Don't change the CSS above, add Your CSS below */
+
+html
+{
+    font-size: 30px;
+}
+#Color
+{
+    color: coral;
+}
+#Font-Size
+{
+    font-size: 2rem;
+}
+#Font-Weight
+{
+    font-weight: 900;
+}
+#Font-Family
+{
+    font-family: "Caveat", cursive;
+}
+#Text-Align
+{
+    text-align: right;
+}
