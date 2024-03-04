@@ -11,12 +11,13 @@ body
 h1 {font-size: 5rem;}
 footer 
 {
-    text-align: right;
+    text-align: center;
     color: midnightblue;
 }
 
 .tile-image
 {
+    height: 200px;
     float: left;
     margin-right: 50px;
 }
@@ -25,3 +26,30 @@ footer
 .right {float: right;}
 .Creative {color: midnightblue;}
 h1 {width: 50%;}
+
+@media (max-width: 680px)
+{
+    .logo
+    {
+        width: 100px
+    }
+    h1
+    {
+        font-size: 56px;
+        text-align: center;
+        width: 100%;
+    }
+    .card
+    {
+        display: block;
+        width: 100%;
+        margin-bottom: 30px;
+        text-align: justify;
+    }
+    .tile-image
+    {
+        width: 100%;
+        height: auto;
+        margin-bottom: 10px;
+    }
+}
