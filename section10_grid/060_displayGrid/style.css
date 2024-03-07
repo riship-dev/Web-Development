@@ -1,0 +1,15 @@
+.white, .black
+{
+    width: 100px;
+    height: 100px;
+}
+.white {background-color: violet;}
+.black {background-color: purple;}
+
+.container
+{
+    width: fit-content;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+}
