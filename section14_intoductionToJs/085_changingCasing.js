@@ -1,4 +1,4 @@
-uName = prompt("What is your name?: ");
+uName = prompt("What is your name?: ").toLowerCase();
 alert(
     "Hi "
     + uName.slice(0,1).toUpperCase()
