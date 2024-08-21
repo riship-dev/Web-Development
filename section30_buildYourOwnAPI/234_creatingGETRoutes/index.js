@@ -34,6 +34,42 @@ APP.get("/filter", (req, res) => {
     res.json(FILTERED_JOKE);
 });
 
+APP.post("/jokes", (req, res) => {
+    const NEW_JOKE = {
+        id: jokes.length + 1,
+        jokeText: req.body.text,
+        jokeType: req.body.type
+    };
+    jokes.push(NEW_JOKE);
+    console.log(jokes.slice(-1));
+    res.json(NEW_JOKE);
+});
+
+APP.put("/jokes/id", (req, res) => {
+    const ID = parseInt(req.params.id);
+    const REPLACEMENT_JOKE = {
+        id: ID,
+        jokeText: req.body.text,
+        jokeType: req.body.type
+    };
+    const SEARCH_INDEX = jokes.findIndex((joke) => joke.id === ID);
+    jokes[SEARCH_INDEX] = REPLACEMENT_JOKE; 
+    res.json(NEW_JOKE);
+});
+
+APP.patch("/jokes/id", (req, res) => {
+    const ID = parseInt(req.params.id);
+    const EXISTING_JOKE = jokes.find((joke) => joke.id === ID);
+    const REPLACEMENT_JOKE = {
+        id: ID,
+        jokeText: req.body.text || EXISTING_JOKE.jokeText,
+        jokeType: req.body.type || EXISTING_JOKE.jokeType
+    };
+    const SEARCH_INDEX = jokes.findIndex((joke) => joke.id === ID);
+    jokes[SEARCH_INDEX] = REPLACEMENT_JOKE; 
+    res.json(NEW_JOKE);
+});
+
 let jokes = [
     {
         id: 1,
