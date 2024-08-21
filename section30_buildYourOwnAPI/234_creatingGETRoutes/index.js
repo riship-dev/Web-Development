@@ -4,16 +4,7 @@ const APP = express();
 const PORT = 3000;
 APP.use(bodyParser.urlencoded({ extended: true }));
 
-const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
-
-//1. GET a random joke
-//2. GET a specific joke
-//3. GET a jokes by filtering on the joke type
-//4. POST a new joke
-//5. PUT a joke
-//6. PATCH a joke
-//7. DELETE Specific joke
-//8. DELETE All jokes
+const MASTER_KEY = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 
 APP.listen(PORT, () => {
     console.log(`Successfully started server on port ${PORT}.`);
@@ -68,6 +59,30 @@ APP.patch("/jokes/id", (req, res) => {
     const SEARCH_INDEX = jokes.findIndex((joke) => joke.id === ID);
     jokes[SEARCH_INDEX] = REPLACEMENT_JOKE; 
     res.json(NEW_JOKE);
+});
+
+APP.delete("/jokes/id", (req, res) => {
+    const ID = parseInt(req.params.id);
+    const SEARCH_INDEX = jokes.findIndex((joke) => joke.id === ID);
+    if (SEARCH_INDEX > -1) {
+        jokes.splice(SEARCH_INDEX, 1);
+        res.sendStatus(200);
+    } else { 
+        res.status(404).json({
+            error: `Joke with id: ${ID} not found.`
+        });
+    }
+});
+APP.delete("/all", (req, res) => {
+    const USER_KEY = req.query.key;
+    if (USER_KEY === MASTER_KEY) {
+        jokes =[];
+        res.sendStatus(200);
+    } else {
+        res.sendStatus(404).json({
+            error: "Unauthorized"
+        });
+    }
 });
 
 let jokes = [
