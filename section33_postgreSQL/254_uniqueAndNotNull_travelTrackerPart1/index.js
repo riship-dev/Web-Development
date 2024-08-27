@@ -1,5 +1,6 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
 const APP = express();
 const PORT = 3000;
 APP.use(bodyParser.urlencoded({ extended: true }));
@@ -22,7 +23,23 @@ APP.get("/", async (req, res) => {
     });
     console.log(RESULT.rows);
     res.render("index.ejs", { countries: countries, total: countries.length });
-    DB.end();
+});
+
+APP.post("/add", async (req, res) => {
+    const INPUT = req.body["country"];
+    const RESULT = await DB.query(
+        "SELECT country_code FROM countries WHERE country_name = $1",
+        [INPUT]
+    ); 
+    if (RESULT.rows.length !== 0) {
+        const DATA = RESULT.rows[0];
+        const COUNTRY_CODE = DATA.country_code;
+        await DB.query(
+            "INSERT INTO visited_countries (country_code) VALUES ($1)",
+            [COUNTRY_CODE]
+        );
+        res.redirect("/");
+    }
 });
 
 APP.listen(PORT, () => {
